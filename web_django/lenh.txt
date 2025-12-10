@@ -1,0 +1,18 @@
+1. lệnh tạo django 
+
+django-admin startproject web_django
+
+2. Tạo thêm thư mục app theo mẫu django
+
+django-admin startapp app
+
+3. tạo csdl mặt định
+python3 manage.py migrate
+
+4. Chạy runserver
+python3 manage.py runserver 8888
+
+5. Lênh up len github
+git add .
+git commit -m "update"
+git push
