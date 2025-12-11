@@ -32,6 +32,12 @@ python manage.py makemigrations
 7. Lệnh này sẽ quét các file models.py trong các ứng dụng của bạn và tạo ra các file mô tả những thay đổi cần thực hiện với cơ sở dữ liệu.
 python3 manage.py makemigrations app
 
-8.Lệnh này sẽ đọc các file migrations vừa tạo (hoặc đã có) và thực thi các lệnh SQL cần thiết để tạo bảng app_post trong file db.sqlite3 của bạn.
+8. Lệnh này sẽ đọc các file migrations vừa tạo (hoặc đã có) và thực thi các lệnh SQL cần thiết để tạo bảng app_post trong file db.sqlite3 của bạn.
 
 python3 manage.py migrate
+
+
+9. Lênh lên github
+🛠️ Cách đẩy thay đổi lên GitHub (Fix Git Push)
+
+git push --set-upstream origin main
