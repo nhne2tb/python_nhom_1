@@ -1,1 +1,18 @@
 
+# Django Framework
+Django==4.2.7 
+
+# Cơ sở dữ liệu (Database) - Ví dụ dùng PostgreSQL trên Render
+psycopg2-binary==2.9.9 
+
+# Máy chủ WSGI (Web Server Gateway Interface) cho Production
+gunicorn==21.2.0 
+
+# Thư viện dùng để xử lý biến môi trường
+python-dotenv==1.0.0 
+
+# Bắt buộc nếu bạn phục vụ static files qua Whitenoise hoặc cần lưu trữ
+whitenoise==6.6.0 
+
+# Thư viện để quản lý static files (ví dụ: S3)
+django-storages==1.14.2
