@@ -16,3 +16,22 @@ python3 manage.py runserver 8888
 git add .
 git commit -m "update"
 git push
+
+5. Tạo user admin 
+python3 manage.py createsuperuser
+
+Username: admin
+Email: admin@gmail.com
+Password: 123456789
+Password (again): 123456789
+
+#6. Chạy lệnh tạo migration để Django biết có model mới:
+
+python manage.py makemigrations
+
+7. Lệnh này sẽ quét các file models.py trong các ứng dụng của bạn và tạo ra các file mô tả những thay đổi cần thực hiện với cơ sở dữ liệu.
+python3 manage.py makemigrations app
+
+8.Lệnh này sẽ đọc các file migrations vừa tạo (hoặc đã có) và thực thi các lệnh SQL cần thiết để tạo bảng app_post trong file db.sqlite3 của bạn.
+
+python3 manage.py migrate
