@@ -42,4 +42,5 @@ python3 manage.py migrate
 
 git push --set-upstream origin main
 
-12
+12. xin chào 
+sdf
