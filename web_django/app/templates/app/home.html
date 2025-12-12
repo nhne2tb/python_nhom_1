@@ -1,15 +1,16 @@
  {% extends "app/base.html" %}
 {% load static%}
 
+
 {% comment %} Quản cáo banner slider {% endcomment %}
 {% block banner_slider %}
 
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+<div id="carouselMainBanner" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselMainBanner" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselMainBanner" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselMainBanner" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselMainBanner" data-bs-slide-to="3" aria-label="Slide 4"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active" data-bs-interval="3000">
@@ -54,24 +55,100 @@
 
 {% endblock banner_slider %}
 
+{% block main_container %}
 
+<div class="col-12" style="margin-top:30px;">
 
-{% block main_container%}
+    <h3>OFFICE WIN & MAC</h3>
+<div style="
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+">
+    <div class="card">
+        <img src="{% static 'app/images/banner/b3.jpg' %}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text…</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
 
-<div style="margin-top:30px;">
+    <div class="card">
+        <img src="{% static 'app/images/banner/b3.jpg' %}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text…</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
 
-
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'app/images/banner/b3.jpg' %}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+    <div class="card">
+        <img src="{% static 'app/images/banner/b3.jpg' %}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text…</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+        <div class="card">
+        <img src="{% static 'app/images/banner/b3.jpg' %}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text…</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
 </div>
 
+
 </div>
-
-
 
 {% endblock main_container %}
+
+
+
+
+
+{% comment %} cột bên phải {% endcomment %}
+{% block sidebar %}
+
+<!-- Ô tìm kiếm -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Tìm kiếm</h5>
+        <form method="GET" action="/search/">
+            <input type="text" class="form-control" name="q" placeholder="Nhập từ khóa...">
+            <button class="btn btn-primary mt-2 w-100">Tìm</button>
+        </form>
+    </div>
+</div>
+
+<!-- Bài viết mới nhất -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Bài viết mới nhất</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a href="#">Bài viết A</a></li>
+            <li class="list-group-item"><a href="#">Bài viết B</a></li>
+            <li class="list-group-item"><a href="#">Bài viết C</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Bình luận mới nhất -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Bình luận mới nhất</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Ninh:</strong> hay quá!</li>
+            <li class="list-group-item"><strong>Hải:</strong> bài này hữu ích.</li>
+            <li class="list-group-item"><strong>Trang:</strong> cảm ơn ad!</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock sidebar %}
+
+
+
