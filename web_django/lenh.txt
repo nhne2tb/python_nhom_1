@@ -41,3 +41,5 @@ python3 manage.py migrate
 🛠️ Cách đẩy thay đổi lên GitHub (Fix Git Push)
 
 git push --set-upstream origin main
+
+12
