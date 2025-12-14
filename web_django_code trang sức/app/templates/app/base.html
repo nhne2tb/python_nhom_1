@@ -24,6 +24,14 @@
       background: #cae2fbff; 
       {% comment %} f7f7f7 {% endcomment %}
   }
+    
+    /* 🌟 BẮT ĐẦU ĐOẠN ĐÃ THÊM: Giới hạn chiều cao Banner */
+    .carousel-inner img {
+        max-height: 480px; /* Chiều cao tối đa 400px */
+        object-fit: cover; /* Đảm bảo hình ảnh được cắt để lấp đầy khung */
+    }
+    /* KẾT THÚC ĐOẠN ĐÃ THÊM */
+
 
   .container-fluid {
       max-width: 1200px;
@@ -34,13 +42,13 @@
         margin-top: 20px; /* chỉnh khoảng cách tùy ý */
     }
 
-    .navbar-brand {
-        display: flex; /* Dùng flexbox để căn chỉnh icon và chữ */
-        align-items: center; /* Căn giữa dọc */
-    }
+    .navbar-brand {
+        display: flex; /* Dùng flexbox để căn chỉnh icon và chữ */
+        align-items: center; /* Căn giữa dọc */
+    }
 </style>
 
-        <title>N1-Jewelry | Trang chủ</title>
+        <title>N1-Jewelry | Trang chủ</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -52,11 +60,11 @@
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     
-        <a class="navbar-brand" href="{% url 'app:home' %}">
-      <i class="fa fa-gem" style="color: #ff007f; font-size: 30px;"></i>
-      <span style="font-size: 30px; font-weight: 900; color: #ff007f; margin-left: 5px;">N1-Jewelry</span>
+        <a class="navbar-brand" href="{% url 'app:home' %}">
+      <i class="fa fa-gem" style="color: #ff007f; font-size: 30px;"></i>
+      <span style="font-size: 30px; font-weight: 900; color: #ff007f; margin-left: 5px;">N1-Jewelry</span>
     </a>
-      
+      
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -72,7 +80,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'app:product_list' %}">Tất cả Sản phẩm</a></li>
-            {% comment %} Đây là nơi bạn sẽ duyệt qua danh mục {% endcomment %}
+            {% comment %} Đây là nơi bạn sẽ duyệt qua danh mục {% endcomment %}
           </ul>
         </li>
                 <li class="nav-item">
@@ -132,6 +140,8 @@ user        </a>
 {% endblock main_container %}
 
 </div>
+
+
 
 {% comment %} Phần chân trang {% endcomment %}
 
