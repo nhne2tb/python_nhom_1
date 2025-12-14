@@ -1,0 +1,31 @@
+{% extends "app/base.html" %} 
+{% load static %}
+
+{% block title %}
+    Danh Sách Sản Phẩm - N1-JEWELRY
+{% endblock %}
+
+{% block content %}
+    <h1>Danh Sách Sản Phẩm Trang Sức</h1>
+    
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product-item">
+                <a href="{% url 'app:product_detail' product.id product.slug %}">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 200px; height: auto;">
+                    {% else %}
+                        <img src="{% static 'app/images/default.jpg' %}" alt="{{ product.name }}" style="width: 200px; height: auto;">
+                    {% endif %}
+                </a>
+                
+                <h3>{{ product.name }}</h3>
+                <p class="price">{{ product.price }} VNĐ</p>
+                
+                <a href="{% url 'app:product_detail' product.id product.slug %}" class="btn-detail">Xem Chi Tiết</a>
+            </div>
+        {% empty %}
+            <p>Hiện tại chưa có sản phẩm nào. Vui lòng thêm sản phẩm qua trang Admin.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
