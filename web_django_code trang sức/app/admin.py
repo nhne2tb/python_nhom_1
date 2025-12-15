@@ -1,18 +1,16 @@
 from django.contrib import admin
-from .models import Category, Product 
+from .models import Category, Product # ⬅️ Đảm bảo đã import cả hai Model
 
-# Tùy chỉnh cách hiển thị Product trong trang Admin
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price', 'available', 'created', 'updated']
-    list_filter = ['available', 'created', 'updated', 'category']
-    list_editable = ['price', 'available']
-    prepopulated_fields = {'slug': ('name',)} 
-
-# Tùy chỉnh cách hiển thị Category trong trang Admin
+# Đăng ký Category Model
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {'slug': ('name',)} # Tự động điền slug
 
-# Đăng ký các Model mới với Admin
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Product, ProductAdmin)
+# Đăng ký Product Model
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug', 'price', 'available', 'created', 'updated']
+    list_filter = ['available', 'created', 'updated']
+    list_editable = ['price', 'available'] # Cho phép chỉnh sửa trực tiếp từ list view
+    prepopulated_fields = {'slug': ('name',)}
