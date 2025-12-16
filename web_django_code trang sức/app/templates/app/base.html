@@ -1,155 +1,79 @@
 {% load static %}
-
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-{% comment %} CSS {% endcomment %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<link href="{% static 'app/css/style.css' %}" rel="stylesheet">
-<link href="{% static 'app/css/all.min.css' %}" rel="stylesheet">
-<link href="{% static 'app/css/owl.carousel.min.css' %}" rel="stylesheet">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>N1-Jewelry | Trang chủ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
- {% comment %} js {% endcomment %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
-<script src="{% static 'app/js/all.min.js' %}"></script>
-<script src="{% static 'app/js/myscript.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-<style>
-  body {
-      background: #cae2fbff; 
-      {% comment %} f7f7f7 {% endcomment %}
-  }
+    {% comment %} CSS Bootstrap và Font Awesome (Sửa lỗi mất icon) {% endcomment %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    /* 🌟 BẮT ĐẦU ĐOẠN ĐÃ THÊM: Giới hạn chiều cao Banner */
-    .carousel-inner img {
-        max-height: 480px; /* Chiều cao tối đa 400px */
-        object-fit: cover; /* Đảm bảo hình ảnh được cắt để lấp đầy khung */
-    }
-    /* KẾT THÚC ĐOẠN ĐÃ THÊM */
+    <link href="{% static 'app/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/all.min.css' %}" rel="stylesheet">
 
+    <style>
+        body { background: #cae2fbff; }
+        .carousel-inner img { max-height: 480px; object-fit: cover; }
+        .container-fluid { max-width: 1400px; }
+        .nav-link { font-size: 15px; white-space: nowrap; }
+        /* Đảm bảo icon logo luôn đúng màu */
+        .fa-gem { color: #ff007f !important; }
+    </style>
+</head>
+<body> 
 
-  .container-fluid {
-      max-width: 1200px;
-      margin: 0 auto;
-  }
+    {% comment %} Thanh Menu {% endcomment %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'app:home' %}">
+                <i class="fa-solid fa-gem" style="font-size: 24px;"></i>
+                <span style="font-size: 24px; font-weight: 900; color: #ff007f; margin-left: 8px;">N1-Jewelry</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      .carousel {
-        margin-top: 20px; /* chỉnh khoảng cách tùy ý */
-    }
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'app:home' %}">Trang chủ</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sản phẩm</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'app:product_list' %}">Tất cả</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                </ul>
 
-    .navbar-brand {
-        display: flex; /* Dùng flexbox để căn chỉnh icon và chữ */
-        align-items: center; /* Căn giữa dọc */
-    }
-</style>
+                {% comment %} Form tìm kiếm {% endcomment %}
+                <form class="d-flex mx-2" role="search" method="GET" action="{% url 'app:search' %}">
+                    <input class="form-control form-control-sm me-2" type="search" name="search_product" placeholder="Tìm sản phẩm...">
+                    <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+                </form>
 
-        <title>N1-Jewelry | Trang chủ</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body> 
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Đăng nhập</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-{% comment %} thanh menu {% endcomment %}
+    <div class="main-wrapper" style="padding-bottom: 60px; max-width: 1200px; margin: 0 auto; padding-left: 15px; padding-right: 15px;">
+        {% block banner_slider %}{% endblock banner_slider %}
+        {% block main_container %} {% endblock main_container %}
+    </div>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    
-        <a class="navbar-brand" href="{% url 'app:home' %}">
-      <i class="fa fa-gem" style="color: #ff007f; font-size: 30px;"></i>
-      <span style="font-size: 30px; font-weight: 900; color: #ff007f; margin-left: 5px;">N1-Jewelry</span>
-    </a>
-      
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'app:home' %}">Trang chủ</a>
-        </li>
+    <footer class="text-center py-1 bg-primary text-white fixed-bottom" style="font-size: 13px;">
+        Copyright © 2025 N1-Jewelry.
+    </footer>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="{% url 'app:product_list' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Sản phẩm
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'app:product_list' %}">Tất cả Sản phẩm</a></li>
-            {% comment %} Đây là nơi bạn sẽ duyệt qua danh mục {% endcomment %}
-          </ul>
-        </li>
-                <li class="nav-item">
-          <a class="nav-link" href="/news">Giới thiệu</a>
-        </li>
-                <li class="nav-item">
-          <a class="nav-link" href="#">Liên hệ</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-user        </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
-            <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Thoát</a></li>
-          </ul>
-        </li>
-
-                        <li class="nav-item">
-          <a class="nav-link" href="#">Đăng nhập</a>
-        </li>
-                <li class="nav-item">
-          <a class="nav-link" href="#">Đăng ký
-          </a>
-        </li>
-
-  </div>
-</nav>
-
-{% comment %} main-content {% endcomment %}
-<style>
-  .main-wrapper {
-      padding-bottom: 120px;  /* chừa chỗ tránh footer che */
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-left: 15px;
-      padding-right: 15px;
-  }
-</style>
-<div class="main-wrapper">
-
-  {% block banner_slider %}{% endblock banner_slider %}
-
-
-{% block main_container%} 
-
-{% endblock main_container %}
-
-</div>
-
-
-
-{% comment %} Phần chân trang {% endcomment %}
-
-<footer class="text-center p-2 bg-primary text-white fixed-bottom">
-  Copyright © 2025 N1-Jewelry.
-</footer>
-
-        
-        <script src="" async defer></script>
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
