@@ -19,7 +19,7 @@
         .carousel-inner img { max-height: 480px; object-fit: cover; }
         .container-fluid { max-width: 1400px; }
         .nav-link { font-size: 15px; white-space: nowrap; }
-        /* Đảm bảo icon logo luôn đúng màu */
+        /* Đảm bảo icon logo luôn đúng màu hồng */
         .fa-gem { color: #ff007f !important; }
     </style>
 </head>
@@ -56,23 +56,41 @@
                     <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
                 </form>
 
+                {% comment %} Phần Thành viên: Tự động đổi dựa trên trạng thái đăng nhập {% endcomment %}
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Đăng nhập</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                Chào, {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                                <li><a class="dropdown-item" href="#">Đơn hàng của tôi</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="{% url 'app:logout' %}">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'app:login' %}">Đăng nhập</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'app:register' %}">Đăng ký</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
+    {% comment %} Nội dung chính {% endcomment %}
     <div class="main-wrapper" style="padding-bottom: 60px; max-width: 1200px; margin: 0 auto; padding-left: 15px; padding-right: 15px;">
         {% block banner_slider %}{% endblock banner_slider %}
         {% block main_container %} {% endblock main_container %}
     </div>
 
+    {% comment %} Footer chân trang {% endcomment %}
     <footer class="text-center py-1 bg-primary text-white fixed-bottom" style="font-size: 13px;">
         Copyright © 2025 N1-Jewelry.
     </footer>
 
+    {% comment %} Scripts {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

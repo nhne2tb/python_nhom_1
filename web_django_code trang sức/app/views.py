@@ -41,3 +41,34 @@ def product_list(request, category_slug=None):
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     return render(request, 'app/product/detail.html', {'product': product})
+
+# View Đăng ký
+def register(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Đăng ký thành công! Hãy đăng nhập.")
+            return redirect('app:login')
+    return render(request, 'app/register.html', {'form': form})
+
+# View Đăng nhập
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('app:home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'app/login.html', {'form': form})
+
+# View Đăng xuất
+def logout_view(request):
+    logout(request)
+    return redirect('app:home')
