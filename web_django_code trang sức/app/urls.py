@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path # DÒNG NÀY RẤT QUAN TRỌNG, KHÔNG ĐƯỢC THIẾU
 from . import views
 
 app_name = 'app'
@@ -6,7 +6,8 @@ app_name = 'app'
 urlpatterns = [
     path('', views.home, name='home'), 
     path('products/', views.product_list, name='product_list'), 
-    path('search/', views.search, name='search'), # Đường dẫn xử lý tìm kiếm
+    path('about/', views.about, name='about'), # Trang giới thiệu nhóm bạn
+    path('search/', views.search, name='search'), 
     path('products/<slug:category_slug>/', views.product_list, name='product_list_by_category'),
     path('products/<int:id>/<slug:slug>/', views.product_detail, name='product_detail'),
     path('register/', views.register, name='register'),
