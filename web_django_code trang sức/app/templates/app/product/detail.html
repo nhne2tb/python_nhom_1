@@ -1,0 +1,28 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ product.name }} - N1-JEWELRY
+{% endblock %}
+
+{% block content %}
+    <div class="product-detail">
+        <h1>{{ product.name }}</h1>
+        
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 500px;">
+        {% endif %}
+        
+        <h2>Giá: {{ product.price }} VNĐ</h2>
+        <p>Chất liệu: <strong>{{ product.material }}</strong></p>
+        <p>Đá quý: <strong>{{ product.gemstone|default:"Không đính đá" }}</strong></p>
+        <p>Kích thước/Trọng lượng: {{ product.size_weight }}</p>
+
+        <h3>Mô tả chi tiết</h3>
+        <p>{{ product.description|linebreaks }}</p>
+        
+        <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
+        
+        <p><a href="{% url 'app:product_list' %}" class="back-link">← Quay lại mua sắm</a></p>
+    </div>
+{% endblock %}

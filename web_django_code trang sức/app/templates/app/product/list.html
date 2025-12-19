@@ -1,0 +1,38 @@
+{% extends "app/base.html" %} 
+{% load static %}
+
+{% block main_container %}
+    <div class="container mt-4">
+        <h2 class="text-center mb-4" style="color: #ff007f; font-weight: bold;">DANH SÁCH SẢN PHẨM</h2>
+        
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <a href="{% url 'app:product_detail' product.id product.slug %}">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top p-3" style="height: 250px; object-fit: contain;">
+                            {% else %}
+                                <img src="{% static 'app/images/default.jpg' %}" alt="{{ product.name }}" class="card-img-top p-3" style="height: 250px; object-fit: contain;">
+                            {% endif %}
+                        </a>
+                        
+                        <div class="card-body text-center">
+                            <h5 class="fw-bold">{{ product.name }}</h5>
+                            <p class="text-danger fw-bold fs-5">{{ product.price }} VNĐ</p>
+                            
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'app:product_detail' product.id product.slug %}" class="btn btn-outline-primary btn-sm">Xem Chi Tiết</a>
+                                <button class="btn btn-primary btn-sm">Thêm Vào Giỏ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p class="alert alert-info">Hiện tại chưa có sản phẩm nào. Vui lòng thêm sản phẩm qua trang Admin.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock main_container %}

@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% block main_container %}
+<div class="container mt-5" style="max-width: 500px; background: white; padding: 30px; border-radius: 10px;">
+    <h2 class="text-center">Đăng ký tài khoản</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+    </form>
+    <p class="text-center mt-3">Đã có tài khoản? <a href="{% url 'app:login' %}">Đăng nhập ngay</a></p>
+</div>
+{% endblock %}
