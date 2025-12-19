@@ -19,11 +19,13 @@
         .container-fluid { max-width: 1400px; }
         .nav-link { font-size: 15px; white-space: nowrap; }
         .fa-gem { color: #ff007f !important; }
+        /* Đồng bộ màu Footer với logo */
+        footer { background-color: #ff007f !important; }
     </style>
 </head>
 <body> 
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="{% url 'app:home' %}">
                 <i class="fa-solid fa-gem" style="font-size: 24px;"></i>
@@ -40,25 +42,27 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sản phẩm</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'app:product_list' %}">Tất cả</a></li>
+                            <li><a class="dropdown-item" href="{% url 'app:product_list' %}">Tất cả sản phẩm</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'app:about' %}">Giới thiệu</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'app:contact' %}">Liên hệ</a>
+                    </li>
                 </ul>
 
                 <form class="d-flex mx-2" role="search" method="GET" action="{% url 'app:search' %}">
                     <input class="form-control form-control-sm me-2" type="search" name="search_product" placeholder="Tìm sản phẩm...">
-                    <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+                    <button class="btn btn-outline-danger btn-sm" type="submit">Tìm</button>
                 </form>
 
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                Chào, {{ user.username }}
+                                <i class="fas fa-user-circle me-1"></i> {{ user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{% url 'app:logout' %}">Đăng xuất</a></li>
@@ -78,8 +82,8 @@
         {% block main_container %} {% endblock main_container %}
     </div>
 
-    <footer class="text-center py-2 bg-primary text-white" style="font-size: 13px; position: relative; width: 100%;">
-        Copyright © 2025 N1-Jewelry.
+    <footer class="text-center py-3 text-white" style="font-size: 13px; width: 100%;">
+        Copyright © 2025 <strong>N1-Jewelry</strong>. Thiết kế bởi Nhóm 1.
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
