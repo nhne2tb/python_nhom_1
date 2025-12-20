@@ -1,85 +1,143 @@
-{% extends 'app/base.html' %}
+{% extends "app/base.html" %}
+{% load static %}
+
 {% block main_container %}
-<div class="container mt-5">
-    <div class="text-center mb-5">
-        <h2 class="fw-bold" style="color: #ff007f;">GIỚI THIỆU NHÓM 1</h2>
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-8">
-                <p class="lead text-dark">
-                    Chúng tôi là tập thể các sinh viên đam mê công nghệ và nghệ thuật, cùng nhau xây dựng dự án 
-                    <strong>N1-Jewelry</strong> với mục tiêu mang lại trải nghiệm mua sắm trang sức trực tuyến tinh tế nhất.
-                </p>
-                <p class="text-muted">
-                    Dự án này là kết quả của sự nỗ lực, tinh thần sáng tạo và sự phối hợp nhịp nhàng giữa 5 thành viên để hoàn thiện hệ thống quản lý và bán hàng hoàn chỉnh trên nền tảng Django.
-                </p>
-            </div>
-        </div>
-    </div>
+<style>
+    .about-section {
+        background-color: #d1e7ff; /* Màu nền xanh nhạt giống hình */
+        padding: 60px 0;
+        min-height: 100vh;
+    }
+    .about-title {
+        color: #e91e63;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    .about-description {
+        max-width: 800px;
+        margin: 0 auto 50px auto;
+        line-height: 1.6;
+        color: #333;
+    }
+    .member-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px 15px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border: none;
+        height: 100%;
+        transition: transform 0.3s;
+    }
+    .member-card:hover {
+        transform: translateY(-10px);
+    }
+    .avatar-circle {
+        width: 100px;
+        height: 100px;
+        background-color: #ff007f;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px auto;
+        color: white;
+        font-size: 50px;
+    }
+    .leader-card .avatar-circle { background-color: #ffc107; }
+    .member-name {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .member-role {
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 5px 15px;
+        display: inline-block;
+        font-size: 0.9rem;
+    }
+    .leader-role { background-color: #ffc107; color: black; border: none; }
+    .card-top-border {
+        height: 8px; width: 100%; position: absolute;
+        top: 0; left: 0; border-radius: 20px 20px 0 0;
+    }
+    .leader-border { background-color: #ffc107; }
+    .member-border { background-color: #ff007f; }
 
-    <div class="row g-4 justify-content-center">
-        <div class="col-md-2 text-center">
-            <div class="card border-0 shadow-sm p-4 h-100" style="background: white; border-radius: 15px; border-top: 5px solid #ffc107 !important;">
-                <div class="mb-3">
-                    <i class="fas fa-user-shield fa-4x" style="color: #ffc107;"></i>
+    /* Style cho dòng cảm ơn mới thêm */
+    .thank-you-note {
+        margin-top: 60px;
+        font-style: italic;
+        color: #555;
+        font-size: 1.1rem;
+        border-top: 1px solid #b8d8ff;
+        padding-top: 20px;
+        display: inline-block;
+    }
+</style>
+
+<div class="about-section">
+    <div class="container text-center">
+        <h1 class="about-title">GIỚI THIỆU NHÓM 1</h1>
+        <p class="about-description">
+            Chúng tôi là tập thể các sinh viên đam mê công nghệ và nghệ thuật, cùng nhau xây dựng dự án <strong>N1-Jewelry</strong> với mục tiêu mang lại trải nghiệm mua sắm trang sức trực tuyến tinh tế nhất.
+            <br><br>
+            Dự án này là kết quả của sự nỗ lực, tinh thần sáng tạo và sự phối hợp nhịp nhàng giữa 5 thành viên để hoàn thiện hệ thống quản lý và bán hàng hoàn chỉnh trên nền tảng Django.
+        </p>
+
+        <div class="row row-cols-1 row-cols-md-5 g-4">
+            <div class="col">
+                <div class="member-card leader-card position-relative">
+                    <div class="card-top-border leader-border"></div>
+                    <div class="avatar-circle"><i class="fas fa-user-shield"></i></div>
+                    <div class="member-name">Nguyễn Hồ Ninh Em</div>
+                    <div class="member-role leader-role fw-bold">Trưởng nhóm</div>
                 </div>
-                <h6 class="fw-bold mb-1" style="font-size: 14px;">Nguyễn Hồ Ninh Em</h6>
-                <span class="badge bg-warning text-dark border w-100 py-2" style="font-size: 10px;">Trưởng nhóm</span>
             </div>
-        </div>
-
-        <div class="col-md-2 text-center">
-            <div class="card border-0 shadow-sm p-4 h-100" style="background: white; border-radius: 15px; border-top: 5px solid #ff007f !important;">
-                <div class="mb-3">
-                    <i class="fas fa-user-circle fa-4x" style="color: #ff007f;"></i>
+            <div class="col">
+                <div class="member-card position-relative">
+                    <div class="card-top-border member-border"></div>
+                    <div class="avatar-circle"><i class="fas fa-user"></i></div>
+                    <div class="member-name">Trịnh Quốc Thái</div>
+                    <div class="member-role">Thành viên</div>
                 </div>
-                <h6 class="fw-bold mb-1" style="font-size: 14px;">Trịnh Quốc Thái</h6>
-                <span class="badge bg-light text-dark border w-100 py-2" style="font-size: 10px;">Thành viên</span>
             </div>
-        </div>
-
-        <div class="col-md-2 text-center">
-            <div class="card border-0 shadow-sm p-4 h-100" style="background: white; border-radius: 15px; border-top: 5px solid #ff007f !important;">
-                <div class="mb-3">
-                    <i class="fas fa-user-circle fa-4x" style="color: #ff007f;"></i>
+            <div class="col">
+                <div class="member-card position-relative">
+                    <div class="card-top-border member-border"></div>
+                    <div class="avatar-circle"><i class="fas fa-user"></i></div>
+                    <div class="member-name">Phan Nhật Phát</div>
+                    <div class="member-role">Thành viên</div>
                 </div>
-                <h6 class="fw-bold mb-1" style="font-size: 14px;">Phan Nhật Phát</h6>
-                <span class="badge bg-light text-dark border w-100 py-2" style="font-size: 10px;">Thành viên</span>
             </div>
-        </div>
-
-        <div class="col-md-2 text-center">
-            <div class="card border-0 shadow-sm p-4 h-100" style="background: white; border-radius: 15px; border-top: 5px solid #ff007f !important;">
-                <div class="mb-3">
-                    <i class="fas fa-user-circle fa-4x" style="color: #ff007f;"></i>
+            <div class="col">
+                <div class="member-card position-relative">
+                    <div class="card-top-border member-border"></div>
+                    <div class="avatar-circle"><i class="fas fa-user"></i></div>
+                    <div class="member-name">Lê Hồng Mi</div>
+                    <div class="member-role">Thành viên</div>
                 </div>
-                <h6 class="fw-bold mb-1" style="font-size: 14px;">Lê Hồng Mi</h6>
-                <span class="badge bg-light text-dark border w-100 py-2" style="font-size: 10px;">Thành viên</span>
             </div>
-        </div>
-
-        <div class="col-md-2 text-center">
-            <div class="card border-0 shadow-sm p-4 h-100" style="background: white; border-radius: 15px; border-top: 5px solid #ff007f !important;">
-                <div class="mb-3">
-                    <i class="fas fa-user-circle fa-4x" style="color: #ff007f;"></i>
+            <div class="col">
+                <div class="member-card position-relative">
+                    <div class="card-top-border member-border"></div>
+                    <div class="avatar-circle"><i class="fas fa-user"></i></div>
+                    <div class="member-name">Trần Ngọc Hưng</div>
+                    <div class="member-role">Thành viên</div>
                 </div>
-                <h6 class="fw-bold mb-1" style="font-size: 14px;">Trần Ngọc Hưng</h6>
-                <span class="badge bg-light text-dark border w-100 py-2" style="font-size: 10px;">Thành viên</span>
             </div>
         </div>
-    </div>
 
-    <div class="row mt-5">
-        <div class="col-12 p-4 bg-white rounded shadow-sm border-start border-4 border-primary">
-            <h5 class="fw-bold" style="color: #0d6efd;">Lời cảm ơn chân thành</h5>
-            <p class="mb-0 text-dark">
-                Nhóm 1 chân thành cảm ơn sự hướng dẫn tận tình của <strong>Thầy Đặng Quốc Bảo</strong> và sự hỗ trợ lẫn nhau giữa các thành viên để dự án N1-Jewelry được hoàn thiện đúng tiến độ.
-            </p>
+        <div class="thank-you-note">
+            <p>Chúng em xin chân thành cảm ơn sự chỉ dẫn tận tình từ thầy <strong>Đặng Quốc Bảo</strong> để hoàn thành dự án này.</p>
         </div>
     </div>
 </div>
-
-<style>
-    .card { transition: transform 0.3s ease; }
-    .card:hover { transform: translateY(-10px); }
-</style>
 {% endblock %}
