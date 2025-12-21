@@ -1,0 +1,56 @@
+{% extends "app/base.html" %}
+{% block main_container %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="color: #ff007f; font-weight: bold;">THÔNG TIN NHẬN HÀNG</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 p-4" style="border-radius: 15px;">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Họ</label>
+                            <input type="text" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tên</label>
+                            <input type="text" name="last_name" class="form-control" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Địa chỉ giao hàng</label>
+                            <input type="text" name="address" class="form-control" placeholder="Số nhà, tên đường, phường/xã..." required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Số điện thoại</label>
+                            <input type="text" name="phone" class="form-control" required>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <button class="btn btn-danger w-100 py-2 fw-bold" type="submit" style="background-color: #ff007f; border: none;">XÁC NHẬN ĐẶT HÀNG</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 p-3 bg-light" style="border-radius: 15px;">
+                <h5 class="fw-bold">Tóm tắt đơn hàng</h5>
+                <hr>
+                {% for item in cart.items.all %}
+                <div class="d-flex justify-content-between mb-2">
+                    <span>{{ item.product.name }} (x{{ item.quantity }})</span>
+                    <span>{{ item.get_cost | floatformat:0 }} VNĐ</span>
+                </div>
+                {% endfor %}
+                <hr>
+                <div class="d-flex justify-content-between text-danger fw-bold">
+                    <span>TỔNG TIỀN:</span>
+                    <span>{{ cart.get_total_price | floatformat:0 }} VNĐ</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_container %}
