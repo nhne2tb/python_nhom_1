@@ -12,6 +12,9 @@ python3 manage.py migrate
 4. Chạy runserver
 python3 manage.py runserver 8888
 
+python3 manage.py runserver
+
+
 5. Lênh up len github
 git add .
 git commit -m "update"
@@ -44,3 +47,19 @@ git push --set-upstream origin main
 
 12. xin chào 
 sdf
+
+
+# 1. Dừng server nếu còn
+Ctrl + C
+
+# 2. Xóa cache
+find . -name "__pycache__" -type d -exec rm -rf {} +
+
+# 3. Kiểm tra mysqlclient đã bị gỡ
+pip3 list | grep mysql
+# 👉 không được thấy mysqlclient
+
+# 4. Chạy lại
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver 8888

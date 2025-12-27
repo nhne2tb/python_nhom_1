@@ -1,0 +1,91 @@
+/* Màu sắc & Font */
+:root {
+    --gold: #D4AF37;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
+
+/* Banner chính */
+.hero-banner {
+    height: 500px;
+    background: url('link_anh_banner_nguoi_mau.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    border: 1px solid var(--gold);
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+/* Nút lọc bài viết */
+.btn-filter {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    margin: 5px;
+    transition: 0.3s;
+}
+
+.btn-filter.active,
+.btn-filter:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+/* Thẻ bài viết */
+.blog-card {
+    border: 1px solid #eee;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.blog-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.blog-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.blog-card p {
+    font-size: 13px;
+    color: #888;
+}
+
+.img-wrapper {
+    overflow: hidden;
+    height: 300px;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.blog-card:hover img {
+    transform: scale(1.05);
+}
