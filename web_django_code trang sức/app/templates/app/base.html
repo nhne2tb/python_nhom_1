@@ -15,14 +15,12 @@
     <style>
         body { background: #cae2fbff; overflow-x: hidden; }
         
-        /* Chỉnh độ cao banner vừa vặn (500px) */
         .carousel-inner img { 
             height: 500px; 
             object-fit: cover; 
-            width: 10%; 
+            width: 100%; 
         }
 
-        /* Bo góc và đổ bóng cho banner giống các mẫu hiện đại */
         .carousel {
             border-radius: 15px;
             overflow: hidden;
@@ -34,7 +32,23 @@
         footer { background-color: #ff007f !important; }
         .nav-link:hover { color: #ff007f !important; }
         
-        /* Hiệu ứng zoom nhẹ khi di chuột vào sản phẩm cho xịn */
+        .cart-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: #ff007f;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
         .product-card:hover img {
             transform: scale(1.05);
             transition: 0.3s;
@@ -67,7 +81,14 @@
                     <button class="btn btn-outline-danger btn-sm" type="submit">Tìm</button>
                 </form>
 
-                <ul class="navbar-nav mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item me-3">
+                        <a class="nav-link cart-wrapper" href="{% url 'app:view_cart' %}">
+                            <i class="fa-solid fa-cart-shopping" style="font-size: 20px;"></i>
+                            <span class="cart-badge">{{ cart_item_count }}</span>
+                        </a>
+                    </li>
+
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">

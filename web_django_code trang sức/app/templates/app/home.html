@@ -1,7 +1,6 @@
 {% extends "app/base.html" %}
 {% load static %}
 
-{% comment %} BANNER CHÍNH - ĐÃ ĐỔI TÊN THÀNH b1, b2, b3 {% endcomment %}
 {% block banner_slider %}
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
@@ -14,23 +13,14 @@
     <div class="carousel-item active" data-bs-interval="3000">
       <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="Banner 1">
     </div>
-
     <div class="carousel-item" data-bs-interval="3000">
       <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="Banner 2">
     </div>
-
     <div class="carousel-item" data-bs-interval="3000">
       <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="Banner 3">
     </div>
   </div>
-
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-  </button>
-</div>
+  </div>
 {% endblock banner_slider %}
 
 {% block main_container %}
@@ -47,6 +37,41 @@
     </div>
 
     <div class="col-md-9">
+        
+        <div class="filter-box bg-white p-3 mb-4 shadow-sm" style="border-radius: 15px; border-left: 5px solid #ff007f;">
+            <form method="GET" action="{% url 'app:home' %}">
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-12 mb-2">
+                        <span class="fw-bold" style="color: #ff007f;"><i class="fa fa-filter"></i> Bộ lọc nhanh:</span>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="brand" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="">Thương hiệu</option>
+                            <option value="PNJ" {% if request.GET.brand == 'PNJ' %}selected{% endif %}>PNJ</option>
+                            <option value="DOJI" {% if request.GET.brand == 'DOJI' %}selected{% endif %}>DOJI</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="price" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="">Giá khoảng</option>
+                            <option value="0-10" {% if request.GET.price == '0-10' %}selected{% endif %}>Dưới 10tr</option>
+                            <option value="10-50" {% if request.GET.price == '10-50' %}selected{% endif %}>10tr - 50tr</option>
+                            <option value="50+" {% if request.GET.price == '50+' %}selected{% endif %}>Trên 50tr</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="category" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="">Loại sản phẩm</option>
+                            <option value="nhan" {% if request.GET.category == 'nhan' %}selected{% endif %}>Nhẫn</option>
+                            <option value="vong" {% if request.GET.category == 'vong' %}selected{% endif %}>Vòng tay</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'app:home' %}" class="btn btn-sm btn-outline-secondary w-100">Xóa lọc</a>
+                    </div>
+                </div>
+            </form>
+        </div>
         <h2 class="text-center mb-4 mt-3" style="color: #ff007f; font-weight: bold;">Sản Phẩm Nổi Bật</h2>
         <div class="row">
             {% for product in products %}

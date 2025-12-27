@@ -1,7 +1,6 @@
 {% extends "app/base.html" %} 
 {% load static %}
-
-{% block main_container %}
+{% load humanize %} {% block main_container %}
 <div class="container mt-4">
     <h2 class="text-center mb-4" style="color: #ff007f; font-weight: bold;">DANH SÁCH SẢN PHẨM</h2>
 
@@ -10,40 +9,34 @@
         <div class="p-3">
             <h6 class="fw-bold mb-3"><i class="fas fa-filter me-2" style="color: #ff007f;"></i>Bộ lọc sản phẩm:</h6>
             <form method="GET" action="{% url 'app:product_list' %}" class="row g-2">
-                <div class="col-md-2 col-6">
-                    <select name="brand" class="form-select form-select-sm" onchange="this.form.submit()">
-                        <option value="">Thương hiệu</option>
-                        <option value="pnj" {% if request.GET.brand == 'pnj' %}selected{% endif %}>PNJ</option>
-                        <option value="doji" {% if request.GET.brand == 'doji' %}selected{% endif %}>Doji</option>
-                    </select>
-                </div>
-
-                <div class="col-md-2 col-6">
+                
+                <div class="col-md-3 col-6">
                     <select name="price" class="form-select form-select-sm" onchange="this.form.submit()">
-                        <option value="">Giá sản phẩm</option>
-                        <option value="0-5000000" {% if request.GET.price == '0-5000000' %}selected{% endif %}>Dưới 5 triệu</option>
-                        <option value="5000000-10000000" {% if request.GET.price == '5000000-10000000' %}selected{% endif %}>5 - 10 triệu</option>
-                        <option value="10000000-999999999" {% if request.GET.price == '10000000-999999999' %}selected{% endif %}>Trên 10 triệu</option>
+                        <option value="">-- Khoảng giá --</option>
+                        <option value="duoi-10" {% if request.GET.price == 'duoi-10' %}selected{% endif %}>Dưới 10 triệu</option>
+                        <option value="10-100" {% if request.GET.price == '10-100' %}selected{% endif %}>10 - 100 triệu</option>
+                        <option value="tren-100" {% if request.GET.price == 'tren-100' %}selected{% endif %}>Trên 100 triệu</option>
                     </select>
                 </div>
 
-                <div class="col-md-2 col-6">
+                <div class="col-md-3 col-6">
                     <select name="category" class="form-select form-select-sm" onchange="this.form.submit()">
-                        <option value="">Loại trang sức</option>
-                        <option value="nhan" {% if request.GET.category == 'nhan' %}selected{% endif %}>Nhẫn</option>
-                        <option value="day-chuyen" {% if request.GET.category == 'day-chuyen' %}selected{% endif %}>Dây chuyền</option>
+                        <option value="">-- Loại trang sức --</option>
+                        <option value="nhn" {% if request.GET.category == 'nhn' %}selected{% endif %}>Nhẫn</option>
+                        <option value="day-chuyn" {% if request.GET.category == 'day-chuyn' %}selected{% endif %}>Dây chuyền</option>
+                        <option value="vong-tay-kim-cng" {% if request.GET.category == 'vong-tay-kim-cng' %}selected{% endif %}>Vòng tay</option>
                     </select>
                 </div>
 
-                <div class="col-md-2 col-6">
+                <div class="col-md-3 col-6">
                     <select name="material" class="form-select form-select-sm" onchange="this.form.submit()">
-                        <option value="">Chất liệu</option>
+                        <option value="">-- Chất liệu --</option>
                         <option value="vang" {% if request.GET.material == 'vang' %}selected{% endif %}>Vàng</option>
                         <option value="kim-cuong" {% if request.GET.material == 'kim-cuong' %}selected{% endif %}>Kim cương</option>
                     </select>
                 </div>
 
-                <div class="col-md-2 col-12">
+                <div class="col-md-3 col-6">
                     <a href="{% url 'app:product_list' %}" class="btn btn-outline-secondary btn-sm w-100">Xóa bộ lọc</a>
                 </div>
             </form>
@@ -63,10 +56,9 @@
                     </a>
                     <div class="card-body text-center">
                         <h5 class="fw-bold">{{ product.name }}</h5>
-                        <p class="text-danger fw-bold fs-5">{{ product.price | floatformat:0 }} VNĐ</p>
+                        <p class="text-danger fw-bold fs-5">{{ product.price|floatformat:0 }} VNĐ</p>
                         <div class="d-grid gap-2">
                             <a href="{% url 'app:product_detail' product.id product.slug %}" class="btn btn-outline-danger btn-sm">Xem Chi Tiết</a>
-                            
                             <a href="{% url 'app:add_to_cart' product.id %}" class="btn btn-danger btn-sm" style="background-color: #ff007f; border: none;">
                                 Thêm Vào Giỏ
                             </a>
