@@ -54,5 +54,31 @@
             "month": "Tháng 12",
             "revenue": 500
         }
+    ],
+    "quantri": [
+        {
+            "id": 1,
+            "name": "Nguyễn Văn A",
+            "phone": "0987654321",
+            "email": "vana@gmail.com",
+            "total_spent": "25 tr",
+            "status": "Thân thiết"
+        },
+        {
+            "id": 3,
+            "name": "Lê Văn C",
+            "phone": "0911223344",
+            "email": "vanc@gmail.com",
+            "total_spent": "45 tr",
+            "status": "VIP"
+        },
+        {
+            "id": 3,
+            "name": "Lê Hồng Mi",
+            "phone": "0849941818",
+            "email": "lmi313050@gmail.com",
+            "total_spent": "45 tr",
+            "status": "VIP"
+        }
     ]
 }

@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="p-8 max-w-2xl mx-auto min-h-screen">
+    <div class="bg-white p-8 rounded-[2rem] shadow-2xl border border-white">
+        <h2 class="text-2xl font-black text-slate-800 mb-6">Chỉnh sửa thông tin khách hàng</h2>
+        
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Tên khách hàng</label>
+                <input type="text" name="name" value="{{ khach.name }}" class="w-full p-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Số điện thoại</label>
+                    <input type="text" name="phone" value="{{ khach.phone }}" class="w-full p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Tổng chi tiêu</label>
+                    <input type="text" name="total_spent" value="{{ khach.total_spent }}" class="w-full p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Email</label>
+                <input type="email" name="email" value="{{ khach.email }}" class="w-full p-3 bg-slate-50 border border-slate-100 rounded-xl">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Phân hạng</label>
+                <select name="status" class="w-full p-3 bg-slate-50 border border-slate-100 rounded-xl font-bold text-blue-600">
+                    <option value="VIP" {% if khach.status == 'VIP' %}selected{% endif %}>VIP</option>
+                    <option value="Thân thiết" {% if khach.status == 'Thân thiết' %}selected{% endif %}>Thân thiết</option>
+                    <option value="Mới" {% if khach.status == 'Mới' %}selected{% endif %}>Mới</option>
+                </select>
+            </div>
+            
+            <div class="flex gap-3 pt-4">
+                <button type="submit" class="flex-1 bg-slate-900 text-white p-4 rounded-2xl font-bold hover:bg-blue-600 transition-colors">LƯU THAY ĐỔI</button>
+                <a href="{% url 'quantri_khachhang' %}" class="flex-1 bg-slate-100 text-slate-500 p-4 rounded-2xl font-bold text-center hover:bg-slate-200 transition-colors">HỦY</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
