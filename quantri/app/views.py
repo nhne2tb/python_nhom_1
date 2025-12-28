@@ -1,18 +1,24 @@
+import json
+import os
 from django.shortcuts import render
-from .models import MonthlyRevenue
+from django.conf import settings
 
 def home(request):
-    # Dữ liệu giả lập khớp với hình của bạn
+    # Đường dẫn đến file data.json
+    file_path = os.path.join(settings.BASE_DIR, 'data.json')
+    
+    # Đọc dữ liệu từ file
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    # Truyền dữ liệu vào giao diện
     context = {
-        'khach_hang': "1,245",
-        'san_pham_da_ban': "356",
-        'don_hang': "412",
-        'doanh_thu': "980",
-        'chart_data': [
-            {'label': 'T1', 'value': 120},
-            {'label': 'T2', 'value': 200},
-            {'label': 'T3', 'value': 150},
-            {'label': 'T4', 'value': 280},
-        ]
+        'khach_hang': data['stats']['khach_hang'],
+        'san_pham_da_ban': data['stats']['san_pham_da_ban'],
+        'don_hang': data['stats']['don_hang'],
+        'doanh_thu': data['stats']['doanh_thu'],
+        'chart_labels': [item['month'] for item in data['chart_data']],
+        'chart_values': [item['revenue'] for item in data['chart_data']],
     }
+    
     return render(request, 'app/home.html', context)
