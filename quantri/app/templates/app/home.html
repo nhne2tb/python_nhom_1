@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="p-8 max-w-7xl mx-auto space-y-6">
-    <h1 class="text-2xl font-bold">Trang quản trị Marketing – NE Jewelry</h1>
+    <h1 class="text-2xl font-bold">Trang quản trị Marketing – N1 Jewelry</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
@@ -19,6 +19,7 @@
                 <p class="text-2xl font-bold">{{ san_pham_da_ban|default:"356" }}</p>
             </div>
         </div>
+
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
             <i data-lucide="shopping-bag" class="w-8 h-8 text-gray-400"></i>
             <div>
@@ -26,6 +27,7 @@
                 <p class="text-2xl font-bold">{{ don_hang|default:"412" }}</p>
             </div>
         </div>
+
         <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
             <i data-lucide="bar-chart-3" class="w-8 h-8 text-gray-400"></i>
             <div>
@@ -46,26 +48,24 @@
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <h3 class="font-bold mb-2 uppercase text-sm tracking-wide">Quản trị khách hàng</h3>
             <p class="text-gray-500 text-sm mb-4">Xem danh sách, phân loại, lịch sử mua.</p>
-            <a href="{% url 'quantri_khachhang' %}" class="inline-block bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">
-    Xem chi tiết</a>
+            <a href="{% url 'quantri_khachhang' %}" class="inline-block bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">Xem chi tiết</a>
         </div>
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <h3 class="font-bold mb-2 uppercase text-sm tracking-wide">Quản lý sản phẩm đã bán</h3>
             <p class="text-gray-500 text-sm mb-4">Theo dõi sản phẩm, số lượng, lợi nhuận.</p>
-            <a class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">Quản lý</a>
+            <a href="{% url 'quanly_sanpham' %}" class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">Quản lý</a>
         </div>
+
         <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <h3 class="font-bold mb-2 uppercase text-sm tracking-wide">Báo cáo & Marketing</h3>
             <p class="text-gray-500 text-sm mb-4">Thống kê chiến dịch, hiệu quả bán hàng.</p>
-            <a class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">Xem báo cáo</a>
+            <a href="{% url 'baocao_marketing' %}" class="bg-slate-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors">Xem báo cáo</a>
         </div>
     </div>
 </div>
 
 <script>
     const ctx = document.getElementById('revenueChart').getContext('2d');
-    
-    // Dữ liệu từ file JSON mà ông đã truyền qua views.py
     const labels = {{ chart_labels|safe }};
     const dataValues = {{ chart_values|safe }};
 
@@ -74,27 +74,27 @@
             labels: labels,
             datasets: [
                 {
-                    // 1. BIỂU ĐỒ CỘT ĐEN (Dữ liệu gốc)
+                    // 1. BIỂU ĐỒ CỘT
                     type: 'bar',
                     label: 'Doanh thu thực tế (Triệu đồng)',
                     data: dataValues,
                     backgroundColor: '#000000',
                     borderRadius: 5,
-                    barThickness: 50, // Điều chỉnh độ rộng cột cho vừa mắt
+                    barThickness: 50,
                     order: 2 
                 },
                 {
-                    // 2. ĐƯỜNG ĐỎ THEO DÕI LÊN XUỐNG (Trendline)
+                    // 2. ĐƯỜNG 
                     type: 'line',
                     label: 'Xu hướng',
-                    data: dataValues, // Dùng chung dữ liệu nên sẽ khớp đỉnh cột 100%
-                    borderColor: '#ef4444', // Màu đỏ (Tailwind red-500)
+                    data: dataValues, 
+                    borderColor: '#ef4444', 
                     borderWidth: 3,
                     pointBackgroundColor: '#ef4444',
                     pointRadius: 4,
-                    tension: 0, // Độ cong của đường cho đẹp
+                    tension: 0, 
                     fill: false,
-                    order: 1 // Ưu tiên hiện lên trên cột đen
+                    order: 1 
                 }
             ]
         },
@@ -103,16 +103,16 @@
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false // Ẩn chú thích cho giống hình mẫu của ông
+                    display: false 
                 }
             },
             scales: {
                 y: { 
                     beginAtZero: true,
-                    grid: { color: '#f3f4f6' } // Màu lưới mờ mờ
+                    grid: { color: '#f3f4f6' } 
                 },
                 x: { 
-                    grid: { display: false } // Ẩn lưới dọc cho thoáng
+                    grid: { display: false } 
                 }
             }
         }

@@ -81,3 +81,49 @@ def sua_khachhang(request, customer_id):
 
     # 4. Nếu chỉ là mở trang sửa, hiện Form kèm thông tin cũ
     return render(request, 'app/sua_khachhang.html', {'khach': khach_hang})
+
+def quanly_sanpham(request):
+    file_path = os.path.join(settings.BASE_DIR, 'data.json')
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    context = {
+        'danh_sach_sp': data.get('san_pham', [])
+    }
+    return render(request, 'app/quanly_sanpham.html', context)
+
+def baocao_marketing(request):
+    import json
+    import os
+    from django.conf import settings
+    
+    file_path = os.path.join(settings.BASE_DIR, 'data.json')
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    # 1. BIỂU ĐỒ KHÁCH HÀNG
+    danh_sach_khach = data.get('quantri', [])
+    so_vip = len([k for k in danh_sach_khach if k.get('status') == 'VIP'])
+    so_than_thiet = len([k for k in danh_sach_khach if k.get('status') == 'Thân thiết'])
+    so_moi = len(danh_sach_khach) - so_vip - so_than_thiet
+
+    # 2. BIỂU ĐỒ DOANH THU (Lấy từ chart_data trong JSON)
+    chart_data = data.get('chart_data', [])
+    nhan_thang = [item['month'] for item in chart_data]
+    gia_tri_doanh_thu = [item['revenue'] for item in chart_data]
+
+    # 3. BIỂU ĐỒ HIỆU QUẢ (Lấy từ san_pham hoặc data marketing)
+    # Tôi sẽ lấy dữ liệu từ doanh thu kênh marketing như ông muốn
+    nhan_kenh = ['Facebook', 'Tại cửa hàng', 'Zalo']
+    du_lieu_kenh = [300, 450, 230]
+
+    context = {
+        'ti_le_khach': [so_vip, so_than_thiet, so_moi],
+        'nhan_khach': ['VIP', 'Thân thiết', 'Khách mới'],
+        'nhan_thang': nhan_thang,
+        'doanh_thu': gia_tri_doanh_thu,
+        'nhan_kenh': nhan_kenh,
+        'du_lieu_kenh': du_lieu_kenh,
+        'ds_khuyen_mai': data.get('khuyen_mai', [])
+    }
+    return render(request, 'app/baocao_marketing.html', context)

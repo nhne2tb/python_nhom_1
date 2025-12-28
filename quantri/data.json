@@ -55,6 +55,29 @@
             "revenue": 500
         }
     ],
+    "san_pham": [
+        {
+            "id": 1,
+            "name": "Nhẫn Kim Cương NE",
+            "quantity": 10,
+            "profit": "150 tr",
+            "status": "Còn hàng"
+        },
+        {
+            "id": 2,
+            "name": "Dây Chuyền Vàng Ý",
+            "quantity": 5,
+            "profit": "85 tr",
+            "status": "Bán chạy"
+        },
+        {
+            "id": 3,
+            "name": "Bông Tai Ngọc Trai",
+            "quantity": 0,
+            "profit": "40 tr",
+            "status": "Hết hàng"
+        }
+    ],
     "quantri": [
         {
             "id": 1,
@@ -79,6 +102,29 @@
             "email": "lmi313050@gmail.com",
             "total_spent": "45 tr",
             "status": "VIP"
+        }
+    ],
+    "khuyen_mai": [
+        {
+            "id": 1,
+            "name": "Lễ Tình Nhân 14/2",
+            "discount": "40%",
+            "used": 85,
+            "status": "Đang chạy"
+        },
+        {
+            "id": 2,
+            "name": "Khai Xuân Như Ý",
+            "discount": "10%",
+            "used": 40,
+            "status": "Đang chạy"
+        },
+        {
+            "id": 3,
+            "name": "Xả Kho Cuối Năm",
+            "discount": "50%",
+            "used": 100,
+            "status": "Kết thúc"
         }
     ]
 }

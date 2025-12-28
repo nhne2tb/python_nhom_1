@@ -1,0 +1,112 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div class="p-8 max-w-7xl mx-auto space-y-8 min-h-screen bg-slate-50">
+    <div class="flex justify-between items-center bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
+        <div>
+            <h1 class="text-3xl font-black text-slate-800 tracking-tight">Báo Cáo & Marketing</h1>
+            <p class="text-slate-400 text-sm font-bold uppercase tracking-widest mt-1">Phân tích hiệu quả kinh doanh N1 Jewelry</p>
+        </div>
+        <a href="{% url 'home' %}" class="bg-slate-900 text-white px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest hover:bg-blue-600 transition-all">Quay lại Dashboard</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+            <h3 class="text-lg font-black text-slate-800 mb-6 flex items-center gap-2">
+                <i data-lucide="pie-chart" class="text-blue-500"></i> Phân Hạng Khách Hàng
+            </h3>
+            <div class="h-64 flex justify-center">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+            <h3 class="text-lg font-black text-slate-800 mb-6 flex items-center gap-2">
+                <i data-lucide="megaphone" class="text-purple-500"></i> Hiệu Quả Kênh Marketing
+            </h3>
+            <div class="h-64 flex justify-center">
+                <canvas id="channelChart"></canvas> 
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-blue-900/5 border border-white mt-12">
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-xl font-black text-slate-800 flex items-center gap-3">
+                <i data-lucide="ticket-percent" class="text-pink-500 w-6 h-6"></i>
+                Chiến Dịch Khuyến Mãi
+            </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {% for km in ds_khuyen_mai %}
+            <div class="p-6 rounded-[2rem] border border-slate-100 bg-slate-50/50 hover:bg-white hover:shadow-lg transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center border border-slate-50">
+                        <span class="text-2xl font-black text-slate-900">{{ km.discount }}</span>
+                    </div>
+                    <span class="text-[10px] font-black uppercase px-4 py-1.5 rounded-xl
+                        {% if km.status == 'Đang chạy' %} bg-green-500 text-white shadow-lg shadow-green-200 
+                        {% else %} bg-slate-300 text-slate-600 {% endif %}">
+                        {{ km.status }}
+                    </span>
+                </div>
+                
+                <h4 class="font-black text-slate-800 text-lg mb-1 group-hover:text-blue-600 transition-colors">{{ km.name }}</h4>
+                <div class="flex justify-between items-end mb-2">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase">Mức độ hoàn thành</p>
+                    <p class="text-sm font-black text-slate-800">{{ km.used }}%</p>
+                </div>
+
+                <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden p-0.5">
+                    <div class="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 rounded-full transition-all duration-1000" 
+                         style="width: {{ km.used }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. BIỂU ĐỒ KHÁCH HÀNG
+        new Chart(document.getElementById('pieChart'), {
+            type: 'doughnut',
+            data: {
+                labels: {{ nhan_khach|safe }},
+                datasets: [{
+                    data: {{ ti_le_khach|safe }},
+                    backgroundColor: ['#7c3aed', '#3b82f6', '#94a3b8']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+        });
+
+        // 2. BIỂU ĐỒ HIỆU QUẢ KÊNH 
+        new Chart(document.getElementById('channelChart'), {
+            type: 'bar',
+            data: {
+                labels: {{ nhan_kenh|safe }},
+                datasets: [{
+                    label: 'Lượt tiếp cận',
+                    data: {{ du_lieu_kenh|safe }},
+                    backgroundColor: '#1e293b',
+                    borderRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
