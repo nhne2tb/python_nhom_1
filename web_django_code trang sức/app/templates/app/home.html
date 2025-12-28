@@ -2,31 +2,104 @@
 {% load static %}
 
 {% block banner_slider %}
+<style>
+    /* Thiết lập khung cho Banner */
+    .carousel-item {
+        position: relative;
+    }
+    
+    /* Hiệu ứng chữ sang trọng cho riêng Banner 2 */
+    .banner-caption-luxury {
+        position: absolute;
+        top: 50%;
+        left: 8%;
+        transform: translateY(-50%);
+        z-index: 10;
+        text-align: left;
+    }
+    
+    .banner-caption-luxury h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.5rem;
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 10px;
+        /* Hiệu ứng Gradient màu vàng Gold lấp lánh */
+        background: linear-gradient(to bottom, #f1d388 0%, #c5a059 50%, #94763a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+    
+    .banner-caption-luxury p {
+        color: white;
+        font-size: 1.4rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    /* Nút bấm màu xám đen sang trọng theo hình mẫu */
+    .btn-discovery {
+        background: #333; 
+        color: #c5a059;
+        border: none;
+        padding: 10px 35px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-discovery:hover {
+        background: #c5a059;
+        color: white;
+    }
+
+    /* Điều chỉnh cho thiết bị di động */
+    @media (max-width: 768px) {
+        .banner-caption-luxury h1 { font-size: 2.2rem; }
+        .banner-caption-luxury p { font-size: 0.9rem; }
+    }
+</style>
+
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"></button>
-  </div>
-  
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval="3000">
-      <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="Banner 1">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"></button>
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="Banner 2">
+    
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+            <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="Banner 1">
+        </div>
+
+        <div class="carousel-item" data-bs-interval="4000">
+            <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="Banner 2">
+            <div class="banner-caption-luxury">
+                <h1>KHAI XUÂN<br>NHƯ Ý</h1>
+                <p>Tuyệt tác kim cương N1</p>
+                <a href="{% url 'app:product_list' %}" class="btn btn-discovery">KHÁM PHÁ</a>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="3000">
+            <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="Banner 3">
+        </div>
     </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="Banner 3">
-    </div>
-  </div>
-  </div>
+</div>
 {% endblock banner_slider %}
 
 {% block main_container %}
 <div class="row" style="margin-top:30px;">
     <div class="col-md-3 mb-4">
-        <div class="card shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
+        <div class="card shadow-sm border-0" style="border-radius: 15px; overflow: hidden; position: sticky; top: 90px;">
             <img src="{% static 'app/images/banner/b3.jpg' %}" class="card-img-top" alt="Sản phẩm bán chạy">
             <div class="card-body text-center">
                 <h5 class="fw-bold">Bán Chạy Nhất</h5>
@@ -37,7 +110,6 @@
     </div>
 
     <div class="col-md-9">
-        
         <div class="filter-box bg-white p-3 mb-4 shadow-sm" style="border-radius: 15px; border-left: 5px solid #ff007f;">
             <form method="GET" action="{% url 'app:home' %}">
                 <div class="row g-2 align-items-center">
@@ -54,16 +126,16 @@
                     <div class="col-md-3">
                         <select name="price" class="form-select form-select-sm" onchange="this.form.submit()">
                             <option value="">Giá khoảng</option>
-                            <option value="0-10" {% if request.GET.price == '0-10' %}selected{% endif %}>Dưới 10tr</option>
-                            <option value="10-50" {% if request.GET.price == '10-50' %}selected{% endif %}>10tr - 50tr</option>
-                            <option value="50+" {% if request.GET.price == '50+' %}selected{% endif %}>Trên 50tr</option>
+                            <option value="duoi-10" {% if request.GET.price == 'duoi-10' %}selected{% endif %}>Dưới 10tr</option>
+                            <option value="10-100" {% if request.GET.price == '10-100' %}selected{% endif %}>10tr - 100tr</option>
+                            <option value="tren-100" {% if request.GET.price == 'tren-100' %}selected{% endif %}>Trên 100tr</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <select name="category" class="form-select form-select-sm" onchange="this.form.submit()">
                             <option value="">Loại sản phẩm</option>
-                            <option value="nhan" {% if request.GET.category == 'nhan' %}selected{% endif %}>Nhẫn</option>
-                            <option value="vong" {% if request.GET.category == 'vong' %}selected{% endif %}>Vòng tay</option>
+                            <option value="nhn" {% if request.GET.category == 'nhn' %}selected{% endif %}>Nhẫn</option>
+                            <option value="day-chuyn" {% if request.GET.category == 'day-chuyn' %}selected{% endif %}>Dây chuyền</option>
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -72,7 +144,9 @@
                 </div>
             </form>
         </div>
+
         <h2 class="text-center mb-4 mt-3" style="color: #ff007f; font-weight: bold;">Sản Phẩm Nổi Bật</h2>
+        
         <div class="row">
             {% for product in products %}
             <div class="col-md-4 col-sm-6 mb-4">
@@ -94,6 +168,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="alert alert-light shadow-sm">Hiện chưa có sản phẩm nào phù hợp với bộ lọc.</p>
             </div>
             {% endfor %}
         </div>
