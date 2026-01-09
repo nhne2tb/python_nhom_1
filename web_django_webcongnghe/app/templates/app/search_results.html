@@ -1,0 +1,58 @@
+{% extends "app/base.html" %}
+
+{% block main_container %}
+
+<h4 class="mb-4">
+    Kết quả tìm kiếm cho:
+    <span class="text-danger">"{{ query }}"</span>
+</h4>
+
+{% if category_posts %}
+
+    {% for block in category_posts %}
+        <!-- TIÊU ĐỀ THẺ -->
+        <div class="d-flex align-items-center mb-2 mt-4">
+            <h5 class="mb-0 text-uppercase">
+                {{ block.category.name }}
+            </h5>
+            <span class="ms-2 text-muted small">
+                ({{ block.posts|length }} bài)
+            </span>
+        </div>
+
+        <!-- GRID BÀI VIẾT -->
+        <div class="row g-4">
+            {% for post in block.posts %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm search-card">
+
+                    <img src="{{ post.image.url }}"
+                         class="card-img-top search-thumb"
+                         alt="{{ post.image.url }}">
+
+                    <div class="card-body">
+                        <h6>
+                            <a href="/{{ post.category.url_slug }}/bai-viet/{{ post.slug }}/">
+                                {{ post.title|truncatechars:60 }}
+                            </a>
+                        </h6>
+
+                        <p class="small text-muted">
+                            {{ post.summary|truncatewords:18 }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% else %}
+    <div class="alert alert-warning">
+         Không tìm thấy kết quả phù hợp
+    </div>
+{% endif %}
+
+{% endblock main_container %}

@@ -1,0 +1,81 @@
+1. lệnh tạo django 
+
+django-admin startproject web_django
+
+2. Tạo thêm thư mục app theo mẫu django
+
+django-admin startapp app
+
+3. tạo csdl mặt định
+python3 manage.py migrate
+
+4. Chạy runserver
+python3 manage.py runserver 8888
+
+python3 manage.py runserver
+
+ngrok http 8000
+
+
+
+5. Lênh up len github
+git add .
+git commit -m "update"
+git push
+
+5. Tạo user admin 
+python3 manage.py createsuperuser
+
+Username: admin
+Email: admin@gmail.com
+Password: 123456789
+Password (again): 123456789
+
+#6. Chạy lệnh tạo migration để Django biết có model mới:
+
+python manage.py makemigrations
+
+7. Lệnh này sẽ quét các file models.py trong các ứng dụng của bạn và tạo ra các file mô tả những thay đổi cần thực hiện với cơ sở dữ liệu.
+python3 manage.py makemigrations app
+
+8. Lệnh này sẽ đọc các file migrations vừa tạo (hoặc đã có) và thực thi các lệnh SQL cần thiết để tạo bảng app_post trong file db.sqlite3 của bạn.
+
+python3 manage.py migrate
+
+
+9. Lênh lên github
+🛠️ Cách đẩy thay đổi lên GitHub (Fix Git Push)
+
+git push --set-upstream origin main
+
+12. xin chào 
+sdf
+
+
+# 1. Dừng server nếu còn
+Ctrl + C
+
+# 2. Xóa cache
+find . -name "__pycache__" -type d -exec rm -rf {} +
+
+# 3. Kiểm tra mysqlclient đã bị gỡ
+pip3 list | grep mysql
+# 👉 không được thấy mysqlclient
+
+# 4. Chạy lại
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver 8888
+
+
+https://273ec4c74663.ngrok-free.app
+ngrok http 8000 --basic-auth="admin:12345678"
+
+ngrok http 8000
+ngrok http 8888
+
+
+
+15. sửa code phải loa lại
+systemctl restart web_django
+

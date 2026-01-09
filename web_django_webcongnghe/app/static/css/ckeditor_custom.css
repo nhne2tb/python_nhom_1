@@ -1,0 +1,33 @@
+/* Ảnh trong CKEditor luôn thu nhỏ theo khung */
+img {
+    max-width: 30% !important;
+    height: auto !important;
+    width: auto !important;
+    display: block;
+    margin: 10px auto;
+}
+
+
+/* ================================
+   ÉP CARD 1 CỘT TRÊN ĐIỆN THOẠI
+================================ */
+@media (max-width: 576px) {
+
+  /* Mỗi card chiếm 100% chiều ngang */
+  .col-md-4,
+  .col-md-3,
+  .col-md-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Khoảng cách giữa các card */
+  .card {
+    margin-bottom: 16px;
+  }
+
+  /* Nút xem chi tiết full width */
+  .card .btn {
+    width: 100%;
+  }
+}

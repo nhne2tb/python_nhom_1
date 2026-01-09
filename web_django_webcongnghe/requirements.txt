@@ -1,0 +1,18 @@
+# Django core
+Django==4.2.7
+
+# Production server
+gunicorn==21.2.0
+python-dotenv==1.0.0
+
+# Admin UI
+django-jazzmin==2.6.0
+
+# Rich text editor
+django-ckeditor==6.7.0
+
+# Image handling
+Pillow==10.1.0
+
+# Database (MySQL)
+PyMySQL==1.1.0

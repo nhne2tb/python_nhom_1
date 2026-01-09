@@ -1,0 +1,142 @@
+{% extends "app/base.html" %}
+
+{# ================= BANNER SLIDER ================= #}
+{% block banner_slider %}
+{% if banners %}
+<div id="carouselExampleCaptions"
+     class="carousel carousel-dark slide"
+     data-bs-ride="carousel"
+     data-bs-interval="2000"
+     data-bs-pause="false">
+
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    {% for banner in banners %}
+    <button type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="{{ forloop.counter0 }}"
+            class="{% if forloop.first %}active{% endif %}">
+    </button>
+    {% endfor %}
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    {% for banner in banners %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+
+      <img src="{{ banner.image.url }}"
+           class="d-block w-100"
+           alt="{{ banner.title }}"
+           style="object-fit: contain; background: #cae2fbff;">
+
+      {% if banner.title or banner.description %}
+      <div class="carousel-caption d-none d-md-block"
+           style="
+             background: rgba(255,255,255,0.55);
+             padding: 16px 22px;
+             border-radius: 10px;
+             max-width: 70%;
+             margin: 0 auto;
+           ">
+        {% if banner.title %}
+        <h5 style="color:#000; font-weight:700;">
+          {{ banner.title }}
+        </h5>
+        {% endif %}
+
+        {% if banner.description %}
+        <p style="color:#333; margin-bottom:0;">
+          {{ banner.description }}
+        </p>
+        {% endif %}
+      </div>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+{% endif %}
+{% endblock banner_slider %}
+
+{# ================= MAIN CONTENT ================= #}
+{% block main_container %}
+<div class="col-12 mt-4">
+
+{% if is_home %}
+    {# ===== TRANG CHỦ ===== #}
+    {% for item in category_posts %}
+
+        <h3 style="color:red; font-weight:bold; margin-top:25px;">
+            {{ item.category.name }}
+        </h3>
+
+        <div class="post-grid">
+            {% for post in item.posts %}
+            <div class="card">
+                <img src="{{ post.image.url }}" class="card-img-top">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">
+                        {{ post.summary|truncatechars:120 }}
+                    </p>
+                    <a href="{% url 'post_detail' post.category.url_slug post.slug %}"
+                       class="btn btn-view-detail">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+
+{% else %}
+    {# ===== TRANG DANH MỤC ===== #}
+    <h3 style="color:red; font-weight:bold;">
+        {{ current_category.name }}
+    </h3>
+
+    <div class="post-grid">
+        {% for post in posts %}
+        <div class="card">
+            <img src="{{ post.image.url }}" class="card-img-top">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">
+                    {{ post.summary|truncatechars:120 }}
+                </p>
+                <a href="{% url 'post_detail' post.category.url_slug post.slug %}"
+                   class="btn btn-view-detail">
+                    Xem chi tiết
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <p>Chưa có bài viết nào.</p>
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+</div>
+{% endblock main_container %}
